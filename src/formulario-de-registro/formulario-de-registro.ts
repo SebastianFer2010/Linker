@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UsuarioRegistro, ValidacionesRegistro } from '../MODELS/registro.interfaces';
+import { UsuarioRegistro, ValidacionesRegistro } from '../models/registro.interfaces';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router'; 
+import { RouterLink } from '@angular/router';
 @Component({
-  imports: [CommonModule,FormsModule,RouterLink],
+  imports: [FormsModule, RouterLink],
   selector: 'app-formulario-de-registro',
   styleUrl: './formulario-de-registro.sass',
   templateUrl: './formulario-de-registro.html',

@@ -1,10 +1,8 @@
 <div class="login-container">
   <div class="login-card">
-
     <h2>INICIAR SESIÓN</h2>
 
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-
       <div class="input-group">
         <label for="usuario">Usuario (Email):</label>
         <input
@@ -37,19 +35,15 @@
         <p class="cambio-ruta" role="status">{{ mensajeCorreo }}</p>
       }
 
-      <p class="cambio-ruta">
-        ¿No tienes cuenta? <a routerLink="/registro">Regístrate aquí</a>
-      </p>
+      <p class="cambio-ruta">¿No tienes cuenta? <a routerLink="/registro">Regístrate aquí</a></p>
 
-      <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+      <div style="margin-top: 1.5rem; display: flex; justify-content: center">
         <div id="boton-google"></div>
       </div>
 
       @if (mensajeGoogle) {
         <p class="cambio-ruta" role="alert">{{ mensajeGoogle }}</p>
       }
-
     </form>
-    
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, NgZone, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { login, ValidacionesLogin } from '../MODELS/Login.interfaces';
+import { login, ValidacionesLogin } from '../models/Login.interfaces';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
 import { environment } from '../environments/environment';
