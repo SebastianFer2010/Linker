@@ -1,0 +1,68 @@
+<!-- Contenedor principal que centra todo y pone el fondo de color -->
+<div class="registro-container">
+  
+  <!-- La tarjeta blanca o "cuadradito" con sombra -->
+  <div class="registro-card">
+
+    <h2>CREA TU CUENTA</h2>
+
+    <!-- Asegúrate de que el (ngSubmit) coincida con la función de tu TypeScript -->
+    <form (ngSubmit)="onRegistro()" #registroForm="ngForm">
+
+      <!-- Cada campo debe ir envuelto en un div con la clase "input-group" -->
+      <div class="input-group">
+        <label for="nombre">Nombre completo:</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          ngModel
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="correo">Correo (Email):</label>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          ngModel
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="contrasena">Contraseña:</label>
+        <input
+          type="password"
+          id="contrasena"
+          name="contrasena"
+          ngModel
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="confirmarContrasena">Confirmar Contraseña:</label>
+        <input
+          type="password"
+          id="confirmarContrasena"
+          name="confirmarContrasena"
+          ngModel
+          required
+        />
+      </div>
+
+      <button type="submit" class="registro-btn">
+        REGISTRARSE
+      </button>
+
+      <p class="cambio-ruta">
+        ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+      </p>
+
+    </form>
+    
+  </div>
+</div>

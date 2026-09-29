@@ -1,0 +1,51 @@
+<div class="login-container">
+  <div class="login-card">
+
+    <h2>INICIAR SESIÓN</h2>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+
+      <div class="input-group">
+        <label for="usuario">Usuario (Email):</label>
+        <input
+          type="text"
+          id="usuario"
+          name="usuario"
+          [(ngModel)]="credencialesUsuario.usuario"
+          required
+          placeholder="ej. usuario@gmail.com"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="contrasena">Contraseña:</label>
+        <input
+          type="password"
+          id="contrasena"
+          name="contrasena"
+          [(ngModel)]="credencialesUsuario.contrasena"
+          required
+          placeholder="*********"
+        />
+      </div>
+
+      <button type="submit" class="login-btn" [disabled]="cargando">
+        {{ cargando ? 'Cargando... por favor espere' : 'INICIAR SESIÓN' }}
+      </button>
+
+      <p class="cambio-ruta">
+        ¿No tienes cuenta? <a routerLink="/registro">Regístrate aquí</a>
+      </p>
+
+      <div style="margin-top: 1.5rem; display: flex; justify-content: center;">
+        <div id="boton-google"></div>
+      </div>
+
+      @if (mensajeGoogle) {
+        <p class="cambio-ruta" role="alert">{{ mensajeGoogle }}</p>
+      }
+
+    </form>
+    
+  </div>
+</div>
