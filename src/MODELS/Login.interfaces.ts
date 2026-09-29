@@ -5,6 +5,5 @@ contrasena:string;
 
 export interface ValidacionesLogin{
 camposVacios:string;
-exito:string;
 }
 

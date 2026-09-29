@@ -10,30 +10,35 @@ import { RouterLink } from '@angular/router';
   templateUrl: './formulario-de-registro.html',
 })
 export class FormularioDeRegistro {
-  nuevoUsuario :UsuarioRegistro = {
-nombre:'',
-correo:'',
-contrasena:'',
-confirmacioncontrasena:''
-};
+  nuevoUsuario: UsuarioRegistro = {
+    nombre: '',
+    correo: '',
+    contrasena: '',
+    confirmacionContrasena: '',
+  };
 
-mensajes : ValidacionesRegistro ={
-camposIncompletos:'POR FAVOR DE LLENAR TODOS LOS CAMPOS ',
-contrasenaDiferente:'CONTRASENA INCORRECTA',
-exito:'REGISTRO EXITOSO PARA '
-};
+  mensajes: ValidacionesRegistro = {
+    camposIncompletos: 'POR FAVOR DE LLENAR TODOS LOS CAMPOS ',
+    contrasenaDiferente: 'CONTRASENA INCORRECTA',
+    exito: 'REGISTRO EXITOSO PARA ',
+  };
 
-onRegistro(){
-if(this.nuevoUsuario.nombre.trim() === ''|| this.nuevoUsuario.correo.trim() === ''|| this.nuevoUsuario.contrasena.trim() === '' || this.nuevoUsuario.confirmacioncontrasena.trim() === ''){
-alert(this.mensajes.camposIncompletos);
-return;
-}
-if(this.nuevoUsuario.contrasena !== this.nuevoUsuario.confirmacioncontrasena){
-alert(this.mensajes.contrasenaDiferente);
-return;
-}
-console.log('Datos a guardar:', this.nuevoUsuario);
-  alert(`${this.mensajes.exito}${this.nuevoUsuario.nombre}!`);
-}
+  onRegistro(): void {
+    if (
+      this.nuevoUsuario.nombre.trim() === '' ||
+      this.nuevoUsuario.correo.trim() === '' ||
+      this.nuevoUsuario.contrasena.trim() === '' ||
+      this.nuevoUsuario.confirmacionContrasena.trim() === ''
+    ) {
+      alert(this.mensajes.camposIncompletos);
+      return;
+    }
 
+    if (this.nuevoUsuario.contrasena !== this.nuevoUsuario.confirmacionContrasena) {
+      alert(this.mensajes.contrasenaDiferente);
+      return;
+    }
+
+    alert(`${this.mensajes.exito}${this.nuevoUsuario.nombre}!`);
+  }
 }

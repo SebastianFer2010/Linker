@@ -16,7 +16,7 @@
           type="text"
           id="nombre"
           name="nombre"
-          ngModel
+          [(ngModel)]="nuevoUsuario.nombre"
           required
         />
       </div>
@@ -27,7 +27,7 @@
           type="email"
           id="correo"
           name="correo"
-          ngModel
+          [(ngModel)]="nuevoUsuario.correo"
           required
         />
       </div>
@@ -38,18 +38,18 @@
           type="password"
           id="contrasena"
           name="contrasena"
-          ngModel
+          [(ngModel)]="nuevoUsuario.contrasena"
           required
         />
       </div>
 
       <div class="input-group">
-        <label for="confirmarContrasena">Confirmar Contraseña:</label>
+        <label for="confirmacionContrasena">Confirmar Contraseña:</label>
         <input
           type="password"
-          id="confirmarContrasena"
-          name="confirmarContrasena"
-          ngModel
+          id="confirmacionContrasena"
+          name="confirmacionContrasena"
+          [(ngModel)]="nuevoUsuario.confirmacionContrasena"
           required
         />
       </div>

@@ -43,6 +43,7 @@ export class Login implements AfterViewInit {
 
   cargando = false;
   mensajeGoogle = '';
+  mensajeCorreo = '';
 
   credencialesUsuario: login = {
     usuario: '',
@@ -51,7 +52,6 @@ export class Login implements AfterViewInit {
 
   mensajes: ValidacionesLogin = {
     camposVacios: 'Por favor llene los campos ',
-    exito: 'Iniciando sesion con ',
   };
 
   private readonly callbackGoogle = (respuesta: RespuestaGoogle): void => {
@@ -103,17 +103,18 @@ export class Login implements AfterViewInit {
     }
   }
 
-  onLogin(){
-    if(this.credencialesUsuario.usuario.trim() === '' || this.credencialesUsuario.contrasena.trim() === ''){
+  onLogin(): void {
+    this.mensajeCorreo = '';
+
+    if (
+      this.credencialesUsuario.usuario.trim() === '' ||
+      this.credencialesUsuario.contrasena.trim() === ''
+    ) {
       alert(this.mensajes.camposVacios);
       return;
     }
 
-    this.cargando = true;
-
-    setTimeout(() =>{
-      this.cargando = false;
-      alert(this.mensajes.exito + this.credencialesUsuario.usuario +'!');
-    },5000);
+    this.mensajeCorreo =
+      'El inicio de sesión con correo y contraseña está pendiente de conectar con una API.';
   }
 }

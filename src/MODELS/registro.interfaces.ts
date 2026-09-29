@@ -3,7 +3,7 @@ export interface UsuarioRegistro{
     nombre:string;
     correo:string;
     contrasena:string;
-    confirmacioncontrasena:string;
+    confirmacionContrasena: string;
 }
 
 export interface ValidacionesRegistro{
