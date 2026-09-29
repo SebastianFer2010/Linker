@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { Api } from './api';
 
 export interface UsuarioAutenticado {
   sub: string;
@@ -12,13 +12,13 @@ export interface UsuarioAutenticado {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly http = inject(HttpClient);
+  private readonly api = inject(Api);
   private readonly plataforma = inject(PLATFORM_ID);
   private readonly claveSesion = 'linker.usuario';
 
   iniciarSesionGoogle(credential: string): Observable<UsuarioAutenticado> {
-    return this.http
-      .post<UsuarioAutenticado>('/api/auth/google', { credential })
+    return this.api
+      .post<{ credential: string }, UsuarioAutenticado>('/api/auth/google', { credential })
       .pipe(tap((usuario) => this.guardarSesion(usuario)));
   }
 
