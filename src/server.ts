@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -5,28 +6,51 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import { OAuth2Client } from 'google-auth-library';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+const clienteGoogle = new OAuth2Client();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+app.use(express.json());
 
-/**
- * Serve static files from /browser
- */
+app.post('/api/auth/google', async (req, res) => {
+  const clientId = process.env['GOOGLE_CLIENT_ID'];
+  const credential: unknown = req.body?.credential;
+
+  if (!clientId) {
+    return res.status(500).json({ error: 'Falta configurar GOOGLE_CLIENT_ID.' });
+  }
+
+  if (typeof credential !== 'string' || credential.length === 0) {
+    return res.status(401).json({ error: 'La credencial de Google no es válida.' });
+  }
+
+  try {
+    const ticket = await clienteGoogle.verifyIdToken({
+      idToken: credential,
+      audience: clientId,
+    });
+    const payload = ticket.getPayload();
+
+    if (!payload?.sub || !payload.email) {
+      return res.status(401).json({ error: 'La credencial de Google no es válida.' });
+    }
+
+    return res.json({
+      sub: payload.sub,
+      name: payload.name ?? '',
+      email: payload.email,
+      ...(payload.picture ? { picture: payload.picture } : {}),
+    });
+  } catch {
+    return res.status(401).json({ error: 'La credencial de Google no es válida.' });
+  }
+});
+
 app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
@@ -35,9 +59,6 @@ app.use(
   }),
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
 app.use((req, res, next) => {
   angularApp
     .handle(req)
@@ -47,10 +68,6 @@ app.use((req, res, next) => {
     .catch(next);
 });
 
-/**
- * Start the server if this module is the main entry point, or it is ran via PM2.
- * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
- */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
   const port = process.env['PORT'] || 4000;
   app.listen(port, (error) => {
@@ -62,7 +79,4 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
   });
 }
 
-/**
- * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
- */
 export const reqHandler = createNodeRequestHandler(app);

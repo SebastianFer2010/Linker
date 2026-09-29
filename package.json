@@ -20,7 +20,9 @@
     "@angular/platform-server": "^22.1.0",
     "@angular/router": "^22.1.0",
     "@angular/ssr": "^22.1.7",
+    "dotenv": "^18.0.4",
     "express": "^5.1.0",
+    "google-auth-library": "^11.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
